@@ -9,3 +9,5 @@ new webpack.ProvidePlugin({
 }))
 
 module.exports = environment
+
+
