@@ -1,9 +1,11 @@
 <p id="notice"><%= notice %></p>
+  <h2>State List</h2>
+  <table class="table table-dark" style="width: auto;">
+    <p>
+      <td><strong>Name:</strong></td>
+      <td><%= @state.name.titleize %></td>
+    </p>
+  </table>
 
-<p>
-  <strong>Name:</strong>
-  <%= @state.name %>
-</p>
-
-<%= link_to 'Edit', edit_state_path(@state) %> |
-<%= link_to 'Back', states_path %>
+<%= link_to 'Edit', edit_state_path(@state), :class => "btn btn-primary text-white" %> |
+<%= link_to 'Back', states_path,:class => "btn btn-primary text-white" %>

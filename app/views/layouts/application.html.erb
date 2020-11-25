@@ -2,16 +2,74 @@
 <html>
   <head>
     <title>DemoRolify</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= csp_meta_tag %>
+    <%= csrf_meta_tags %>
   </head>
 
-  <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= link_to 'Sign Out', destroy_user_session_path %>
-    <%= yield %>
+  <body class="app sidebar-mini">
+    <header class="app-header">
+      <a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
+      <ul>
+        <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i class="fa fa-user fa-lg"></i></a>
+          <ul class="dropdown-menu settings-menu dropdown-menu-right">
+            <li><a class="dropdown-item" href="page-login.html"><i class="fa fa-sign-out fa-lg"></i> Logout</a></li>
+          </ul>
+        </li>
+      </ul>
+
+      <span class="app-menu__label">
+           <% if !current_user %> 
+              <%= link_to 'Sign In', new_user_session_path, class: 'btn btn-success text-white' %>
+              <%= link_to 'Sign Up', new_user_registration_path, class: 'btn btn-success text-white' %>     
+            <% else %>
+              <%= link_to 'Home', users_path,:class => "btn btn-primary text-white" %>
+              <%= link_to 'Sign Out', destroy_user_session_path, method: :delete,class: 'btn btn-danger text-white' %>
+            <% end %>
+        </span>  
+
+    </header>
+
+    <% if notice %>
+      <p><%= notice %></p>
+    <% elsif alert %>
+      <p><%= alert %></p>
+    <% end %>
+      
+        <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+        <aside class="app-sidebar">
+          <ul class="app-menu">
+              <li>
+                <%= link_to new_user_registration_path, class: 'app-menu__item' do %>
+                    <span class="app-menu__label">New User</span></a>
+                <% end %>
+              </li>
+              <li>
+                <%= link_to addresses_path, class: 'app-menu__item' do %>
+                    <span class="app-menu__label">Address</span></a>
+                <% end %>
+              </li>
+              <li>
+                <%= link_to cities_path, class: 'app-menu__item' do %>
+                    <span class="app-menu__label">City</span></a>
+                <% end %>
+              </li>
+              <li>
+                <%= link_to companies_path, class: 'app-menu__item' do %>
+                    <span class="app-menu__label">Company</span></a>
+                <% end %>
+              </li>
+              <li>
+                <%= link_to states_path, class: 'app-menu__item' do %>
+                    <span class="app-menu__label">State</span></a>
+                <% end %>
+              </li>
+          </ul>
+        </aside>          
+         
+      <main class="app-content">   
+         <%= yield %>
+      </main>
   </body>
 </html>

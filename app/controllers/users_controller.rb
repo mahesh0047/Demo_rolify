@@ -1,4 +1,8 @@
 class UsersController < ApplicationController
+
+    def page
+    end
+    
     def index
         @users = User.all
     end

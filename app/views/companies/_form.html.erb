@@ -11,17 +11,20 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
+   <div class=" col-md-5"> 
+        <%= form.label :name %>
+        <%= form.text_field :name,:class => "form-control"  %>
+    </div>
 
-  <div class="field">
-    <%= form.label :web_url %>
-    <%= form.text_field :web_url %>
-  </div>
+    <div class=" col-md-5">
+        <%= form.label :web_url %>
+        <%= form.text_field :web_url, :class => "form-control"  %>
+    </div>
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+    <br>
+    <div class="col-md-5">
+        <%= form.submit class: "btn btn-primary"%>
+    </div>
+    <br>
+
 <% end %>

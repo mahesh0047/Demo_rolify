@@ -1,29 +1,28 @@
-<p id="notice"><%= notice %></p>
+<h1>Listing Company</h1>
 
-<h1>Companies</h1>
 
-<table>
-  <thead>
+<table class="table table-dark">
+    <thead class="bg-secondary text-white">       
+        <tr>
+            <th>Name</th>
+            <th>Web_Url</th>
+            <th>Action</th>
+            <th>Action</th>
+            <th>Action</th>
+            <th></th>
+        </tr>
+    </thead>
+ 
+  <% @companies.each do |company| %>
     <tr>
-      <th>Name</th>
-      <th>Web url</th>
-      <th colspan="3"></th>
+      <td><%= company.name.titleize %></td>
+      <td><%= company.web_url %></td>
+      <td><%= link_to 'Show', company_path(company), class: 'btn btn-success text-white' %></td>
+      <td><%= link_to 'Edit', edit_company_path(company),class: 'btn btn-info text-white' %></td>
+      <td><%= link_to 'Destroy', company_path(company), method: :delete, data: { confirm: "Are you sure?" },class: 'btn btn-danger text-white' %></td>
     </tr>
-  </thead>
-
-  <tbody>
-    <% @companies.each do |company| %>
-      <tr>
-        <td><%= company.name %></td>
-        <td><%= company.web_url %></td>
-        <td><%= link_to 'Show', company %></td>
-        <td><%= link_to 'Edit', edit_company_path(company) %></td>
-        <td><%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
+  <% end %>
 </table>
 
-<br>
 
-<%= link_to 'New Company', new_company_path %>
+<%= link_to 'Add New Company', new_company_path,:class => "btn btn-warning text-white" %>

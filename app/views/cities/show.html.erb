@@ -1,14 +1,18 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @city.name %>
-</p>
+  <h2> City and State </h2>
+  
+  <table class="table table-dark" style="width: auto;">
+    <tr>
+      <td><strong>Name:</strong></td>
+      <td><%= @city.name.titleize %></td>
+    </tr>
 
-<p>
-  <strong>State:</strong>
-  <%= @city.state.name %>
-</p>
+    <tr>
+      <td><strong>State:</strong></td>
+      <td><%= @city.state.name.titleize %></td>
+    </tr>
+  </table>
 
-<%= link_to 'Edit', edit_city_path(@city) %> |
-<%= link_to 'Back', cities_path %>
+<%= link_to 'Edit', edit_city_path(@city),:class => "btn btn-primary text-white" %> |
+<%= link_to 'Back', cities_path,:class => "btn btn-primary text-white"%>

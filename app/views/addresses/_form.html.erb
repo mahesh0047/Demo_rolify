@@ -11,17 +11,46 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+  <div class="col-md-5">
+    <%= form.label :address %>
+    <%= form.text_field :name,:class => "form-control"  %>
   </div>
 
-  <div class="field">
+  <div class="col-md-5">
     <%= form.label :company_id %>
     <%= form.select(:company_id, Company.all.collect {|c| [c.name, c.id]}, {:prompt => 'Select'},{:class => "form-control"}) %>
   </div>
 
+   <div class="col-md-5">
+    <%= form.label :state_id %>
+    <%= form.select(:state_id, State.all.collect {|s| [s.name, s.id]},{:prompt => 'Select State'},{class: "form-control"}) %>
+  </div>
+
+  <div class="col-md-5">
+    <%= form.label :city %>
+    <%= form.select(:city_id, {}, {:prompt => 'Select City'},{:class => "form-control", id: 'city'}) %>
+  </div>
+
+  <br>
+
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class: "btn btn-primary"  %>
   </div>
 <% end %>
+
+<script>
+      $(document).ready(function() {
+        $("#address_state_id").change(function() {
+          var state_id = $(this).val();
+          // console.log(state_id);
+          $.ajax({
+              url: '/get_city.js',
+              type: 'GET',
+              data: { state_id: state_id}
+              ,success: function (data, status, xhr) {
+                  // console.log("vgswh")
+              }
+            });
+        });
+      });
+</script>

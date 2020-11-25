@@ -1,14 +1,29 @@
 <p id="notice"><%= notice %></p>
+  <h2>Company Details</h2>
 
-<p>
-  <strong>Name:</strong>
-  <%= @address.name %>
-</p>
+  <table class="table table-dark" style="width: auto;">
+    <tr>
+      <td><strong>Name:</strong></td>
+      <td><%= @address.name.titleize %></td>
+    </tr>
 
-<p>
-  <strong>Company:</strong>
-  <%= @address.company.name %>
-</p>
+    <tr>
+      <td><strong>Company:</strong></td>
+      <td><%= @address.company.name.titleize %></td>
+    </tr>
 
-<%= link_to 'Edit', edit_address_path(@address) %> |
-<%= link_to 'Back', addresses_path %>
+    <tr>
+      <td><strong>state:</strong></td>
+      <td><%= @address.state.name.titleize %></td>
+    </tr>
+
+    <tr>
+      <td><strong>city:</strong></td>
+      <td><%= @address.city.name.titleize %></td>
+    </tr>
+
+  </table>
+
+<%= link_to 'Edit', edit_address_path(@address),:class => "btn btn-primary text-white" %> |
+<%= link_to 'Back', addresses_path,:class => "btn btn-primary text-white" %>
+

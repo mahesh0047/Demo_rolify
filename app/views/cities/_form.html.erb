@@ -11,17 +11,19 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="col-md-5">
     <%= form.label :name %>
-    <%= form.text_field :name %>
+    <%= form.text_field :name,:class => "form-control" %>
   </div>
 
-  <div class="field">
+  <div class="col-md-5">
     <%= form.label :state_id %>
     <%= form.select(:state_id, State.all.collect {|s| [s.name, s.id]},{:prompt => 'Select State'},{class: "form-control"}) %>
   </div>
 
+  <br>
+
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class: "btn btn-primary" %>
   </div>
 <% end %>

@@ -1,12 +1,16 @@
-<p id="notice"><%= notice %></p>
-
+<p> <id="notice"><%= notice %></p>
 <h1>Addresses</h1>
 
-<table>
-  <thead>
+<table class="table table-dark">
+  <thead class="bg-secondary text-white">
     <tr>
-      <th>Name</th>
+      <th>Address</th>
       <th>Company</th>
+      <th>State</th>
+      <th>City</th>
+      <th>Action</th>
+      <th>Action</th>
+      <th>Action</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -14,11 +18,13 @@
   <tbody>
     <% @addresses.each do |address| %>
       <tr>
-        <td><%= address.name %></td>
-        <td><%= address.company.name %></td>
-        <td><%= link_to 'Show', address %></td>
-        <td><%= link_to 'Edit', edit_address_path(address) %></td>
-        <td><%= link_to 'Destroy', address, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= address.name.titleize %></td>
+        <td><%= address.company.name.titleize %></td>
+        <td><%= address&.state&.name&.titleize %></td>
+        <td><%= address&.city&.name&.titleize %></td>
+        <td><%= link_to 'Show', address,class: 'btn btn-success text-white' %></td>
+        <td><%= link_to 'Edit', edit_address_path(address),class: 'btn btn-info text-white' %></td>
+        <td><%= link_to 'Destroy', address, method: :delete, data: { confirm: 'Are you sure?' },class: 'btn btn-danger text-white' %></td>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +32,5 @@
 
 <br>
 
-<%= link_to 'New Address', new_address_path %>
+<%= link_to 'New Address', new_address_path,:class => "btn btn-warning text-white" %>
+

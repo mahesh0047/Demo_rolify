@@ -1,14 +1,17 @@
-<p id="notice"><%= notice %></p>
+<h2> Company Details </h2>
 
-<p>
-  <strong>Name:</strong>
-  <%= @company.name %>
-</p>
+<table class="table table-dark" style="width: auto;">
 
-<p>
-  <strong>Web url:</strong>
-  <%= @company.web_url %>
-</p>
+    <tr>
+        <td><strong>Name:</strong></td>
+        <td><%= @company.name.titleize %></td>
+    </tr>
+    
+    <tr>
+        <td><strong>Web_url:</strong></td>
+        <td><%= @company.web_url %></td>
+    </tr>
+</table>
 
-<%= link_to 'Edit', edit_company_path(@company) %> |
-<%= link_to 'Back', companies_path %>
+<%= link_to 'Back', companies_path,:class => "btn btn-primary text-white" %>
+<%= link_to 'Edit', edit_company_path(@company),:class => "btn btn-primary text-white" %>

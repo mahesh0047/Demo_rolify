@@ -21,6 +21,12 @@ class AddressesController < ApplicationController
   def edit
   end
 
+  # def get_city
+  #    @state = State.find(params[:state_id])
+  #    @cities = @state.cities
+  #    p"::::::::::::::#{@cities.class}"
+  #   # render json: { cities: @cities }
+  # end
   # POST /addresses
   # POST /addresses.json
   def create
@@ -69,6 +75,6 @@ class AddressesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def address_params
-      params.require(:address).permit(:name, :company_id)
+      params.require(:address).permit(:name, :company_id, :state_id, :city_id)
     end
 end
