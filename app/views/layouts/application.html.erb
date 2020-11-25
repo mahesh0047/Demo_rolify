@@ -40,11 +40,13 @@
         <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
         <aside class="app-sidebar">
           <ul class="app-menu">
+            <% if !current_user %> 
               <li>
                 <%= link_to new_user_registration_path, class: 'app-menu__item' do %>
                     <span class="app-menu__label">New User</span></a>
                 <% end %>
               </li>
+            <% else %>
               <li>
                 <%= link_to addresses_path, class: 'app-menu__item' do %>
                     <span class="app-menu__label">Address</span></a>
@@ -65,6 +67,7 @@
                     <span class="app-menu__label">State</span></a>
                 <% end %>
               </li>
+            <% end %>
           </ul>
         </aside>          
          
