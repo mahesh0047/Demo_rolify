@@ -29,7 +29,7 @@
 
   <div class="field col-md-5">
     <%= f.label :city %>
-    <%= f.select(:city_id, {}, {:prompt => 'Select City'},{:class => "form-control", id: 'city'}) %>
+    <%= f.select(:city_id, City.all.collect {|c| [c.name, c.id]}, {:prompt => 'Select City'},{:class => "form-control", id: 'city'}) %>
   </div>
 
   <div class="field col-md-5">

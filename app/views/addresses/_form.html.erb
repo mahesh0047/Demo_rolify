@@ -28,7 +28,7 @@
 
   <div class="col-md-5">
     <%= form.label :city %>
-    <%= form.select(:city_id, {}, {:prompt => 'Select City'},{:class => "form-control", id: 'city'}) %>
+    <%= form.select(:city_id,  City.all.collect {|c| [c.name, c.id]}, {:prompt => 'Select City'},{:class => "form-control", id: 'city'}) %>
   </div>
 
   <br>

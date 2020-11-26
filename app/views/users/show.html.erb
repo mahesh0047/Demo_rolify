@@ -29,7 +29,12 @@
 
   <tr>
     <td><strong>Company:</strong></td>
-    <td><%= @user.company.name %></td>
+    <td><%= @user.company.name.titleize %></td>
+  </tr>
+
+   <tr>
+    <td><strong>Role:</strong></td>
+    <td><%= @user.roles.first.name.titleize %></td>
   </tr>
 </table>
 
