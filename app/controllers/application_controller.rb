@@ -3,6 +3,20 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  def after_sign_in_path_for(resource)
+    if resource.has_role? :admin
+      admin_users_path
+    elsif resource.has_role? :team_leader
+      team_leader_users_path
+    elsif resource.has_role? :devloper
+      devloper_users_path
+    elsif resource.has_role? :trainee
+      trainee_user_path(current_user)
+    else
+      user_page_path
+    end
+  end
+
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :phone_no, :state_id, :city_id, :company_id])
   end

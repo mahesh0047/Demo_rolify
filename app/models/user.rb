@@ -2,6 +2,12 @@ class User < ApplicationRecord
   rolify
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+ scope :admin, -> { joins(:roles).where.not('roles.name = ?','admin') }
+ 
+ scope :team_leader, -> { joins(:roles).where( 'roles.name = ? OR roles.name = ?','devloper', 'trainee') }
+
+ scope :devloper, -> { joins(:roles).where( 'roles.name = ?', 'trainee') }
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
@@ -14,4 +20,5 @@ class User < ApplicationRecord
   validates :phone_no,:presence => true,
                  :numericality => true
 
+       
 end

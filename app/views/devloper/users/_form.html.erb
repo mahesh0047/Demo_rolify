@@ -1,0 +1,65 @@
+<%= form_with(model: user, local: true,class: 'form-horizontal') do |f| %>
+  <% if user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+        <% user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field col-md-5">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", :class => "form-control" %>
+  </div>
+
+  <div class="field col-md-5">
+    <%= f.label :name %>
+    <%= f.text_field :name, :class => "form-control" %>
+  </div>
+
+  <div class="field col-md-5">
+    <%= f.label :phone_no %>
+    <%= f.text_field :phone_no, :class => "form-control" %>
+  </div>
+
+  <div class="field col-md-5">
+    <%= f.label :state %>
+    <%= f.select(:state_id, State.all.collect {|s| [s.name, s.id]}, {:prompt => 'Select State'},{:class => "form-control"}) %>
+  </div>
+
+  <div class="field col-md-5">
+    <%= f.label :city %>
+    <%= f.select(:city_id, City.all.collect {|c| [c.name, c.id]}, {:prompt => 'Select City'},{:class => "form-control", id: 'city'}) %>
+  </div>
+
+  <div class="field col-md-5">
+    <%= f.label :company_id %>
+    <%= f.select(:company_id, Company.all.collect {|c| [c.name, c.id]},{:prompt => 'Select company'},{:class => "form-control"})%>
+  </div>
+
+  <div class="actions">
+    <%= f.submit  class: 'btn btn-info text-white'  %>
+  </div>
+<% end %>
+
+
+<script>
+      $(document).ready(function() {
+        $("#user_state_id").change(function() {
+          var state_id = $(this).val();
+          // console.log(state_id);
+          $.ajax({
+              url: '/get_city.js',
+              type: 'GET',
+              data: { state_id: state_id}
+              ,success: function (data, status, xhr) {
+                  // console.log("vgswh")
+              }
+            });
+        });
+      });
+</script>

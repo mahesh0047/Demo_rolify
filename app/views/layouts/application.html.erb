@@ -24,8 +24,19 @@
               <%= link_to 'Sign In', new_user_session_path, class: 'btn btn-success text-white' %>
               <%= link_to 'Sign Up', new_user_registration_path, class: 'btn btn-success text-white' %>     
             <% else %>
-              <%= link_to 'Home', users_path,:class => "btn btn-primary text-white" %>
+                <% if current_user && current_user.has_role?(:admin) %>
+                  <%= link_to 'Home', admin_users_path,:class => "btn btn-danger text-white" %>
+                <% elsif current_user && current_user.has_role?(:team_leader) %>
+                  <%= link_to 'Home', team_leader_users_path,:class => "btn btn-danger text-white" %>
+                <% elsif current_user && current_user.has_role?(:devloper) %>
+                  <%= link_to 'Home', devloper_users_path,:class => "btn btn-danger text-white" %>
+                <% else current_user && current_user.has_role?(:trainee) %>
+                  <%= link_to 'Home', trainee_user_path(current_user),:class => "btn btn-danger text-white" %>
+                <% end %>
               <%= link_to 'Sign Out', destroy_user_session_path, method: :delete,class: 'btn btn-danger text-white' %>
+              <span class="btn btn-danger text-white">
+                <%= current_user.roles.first&.name.titleize %>
+              </span>
             <% end %>
         </span>  
 
@@ -47,27 +58,34 @@
                 <% end %>
               </li>
             <% else %>
-              <li>
-                <%= link_to addresses_path, class: 'app-menu__item' do %>
-                    <span class="app-menu__label">Address</span></a>
-                <% end %>
-              </li>
-              <li>
-                <%= link_to cities_path, class: 'app-menu__item' do %>
-                    <span class="app-menu__label">City</span></a>
-                <% end %>
-              </li>
-              <li>
-                <%= link_to companies_path, class: 'app-menu__item' do %>
-                    <span class="app-menu__label">Company</span></a>
-                <% end %>
-              </li>
-              <li>
-                <%= link_to states_path, class: 'app-menu__item' do %>
-                    <span class="app-menu__label">State</span></a>
-                <% end %>
-              </li>
+              <% if current_user && current_user.has_role?(:trainee) %>
+
+              <% elsif current_user && current_user.has_role?(:devloper) %>
+                 
+              <% else %>
+                  <li>
+                    <%= link_to addresses_path, class: 'app-menu__item' do %>
+                        <span class="app-menu__label">Address</span></a>
+                    <% end %>
+                  </li>
+                  <li>
+                    <%= link_to cities_path, class: 'app-menu__item' do %>
+                        <span class="app-menu__label">City</span></a>
+                    <% end %>
+                  </li>
+                  <li>
+                    <%= link_to companies_path, class: 'app-menu__item' do %>
+                        <span class="app-menu__label">Company</span></a>
+                    <% end %>
+                  </li>
+                  <li>
+                    <%= link_to states_path, class: 'app-menu__item' do %>
+                        <span class="app-menu__label">State</span></a>
+                    <% end %>
+                  </li>
+              <% end %>
             <% end %>
+
           </ul>
         </aside>          
          

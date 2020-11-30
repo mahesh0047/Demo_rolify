@@ -8,6 +8,7 @@ class UsersController < ApplicationController
     end
 
     def edit
+        p "uigtuyfrtuyfuyftuyftuyhftuyftugg-=---------------"
     end
 
     def show

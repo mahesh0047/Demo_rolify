@@ -20,7 +20,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     super
       ExampleMailer.sample_email(@user).deliver
-  end
+    end
 
   # GET /resource/edit
   # def edit

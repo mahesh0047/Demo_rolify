@@ -34,9 +34,9 @@
 
    <tr>
     <td><strong>Role:</strong></td>
-    <td><%= @user.roles.first&.name&.titleize %></td>
+    <td><%= @user.roles.first.name.titleize %></td>
   </tr>
 </table>
 
-<%= link_to 'Edit',edit_user_registration_path,:class => "btn btn-primary text-white" %> |
-<%= link_to 'Back', users_path, :class => "btn btn-primary text-white" %>
+<%# <%= link_to 'Edit', edit_devloper_user_path,:class => "btn btn-primary text-white" %>
+<%= link_to 'Back', devloper_users_path, :class => "btn btn-primary text-white" %>
