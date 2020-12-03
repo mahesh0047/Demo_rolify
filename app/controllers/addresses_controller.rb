@@ -1,7 +1,8 @@
-class AddressesController < ApplicationController
-  before_action :set_address, only: [:show, :edit, :update, :destroy]
-  load_and_authorize_resource
+# frozen_string_literal: true
 
+class AddressesController < ApplicationController
+  before_action :set_address, only: %i[show edit update destroy]
+  load_and_authorize_resource
 
   # GET /addresses
   # GET /addresses.json
@@ -11,8 +12,7 @@ class AddressesController < ApplicationController
 
   # GET /addresses/1
   # GET /addresses/1.json
-  def show
-  end
+  def show; end
 
   # GET /addresses/new
   def new
@@ -20,15 +20,8 @@ class AddressesController < ApplicationController
   end
 
   # GET /addresses/1/edit
-  def edit
-  end
+  def edit; end
 
-  # def get_city
-  #    @state = State.find(params[:state_id])
-  #    @cities = @state.cities
-  #    p"::::::::::::::#{@cities.class}"
-  #   # render json: { cities: @cities }
-  # end
   # POST /addresses
   # POST /addresses.json
   def create
@@ -70,13 +63,14 @@ class AddressesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_address
-      @address = Address.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def address_params
-      params.require(:address).permit(:name, :company_id, :state_id, :city_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_address
+    @address = Address.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def address_params
+    params.require(:address).permit(:name, :company_id, :state_id, :city_id)
+  end
 end

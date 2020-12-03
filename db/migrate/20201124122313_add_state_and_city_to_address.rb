@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddStateAndCityToAddress < ActiveRecord::Migration[6.0]
   def change
     add_reference :addresses, :state, null: true, foreign_key: true

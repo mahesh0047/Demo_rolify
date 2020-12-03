@@ -11,22 +11,23 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="col-md-5">
     <%= form.label :name %>
-    <%= form.text_field :name %>
+    <%= form.text_field :name,class: "form-control" %>
   </div>
 
-  <div class="field">
+  <div class="col-md-5">
     <%= form.label :start_date %>
-    <%= form.date_select :start_date %>
+    <%= form.date_select :start_date, class: "form-control" %>
   </div>
 
-  <div class="field">
+  <div class="col-md-5">
     <%= form.label :language_id %>
-    <%= form.text_field :language_id %>
+    <%= form.select(:language_id, Language.all.collect {|l| [l.name, l.id]},{:prompt => 'Select Language'},{class: "form-control"}) %>
   </div>
 
+  <br>
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit  class: "btn btn-primary" %>
   </div>
 <% end %>

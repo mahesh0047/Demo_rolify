@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
-    before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
   protected
 
@@ -11,13 +13,13 @@ class ApplicationController < ActionController::Base
     elsif resource.has_role? :devloper
       devloper_users_path
     elsif resource.has_role? :trainee
-      trainee_user_path(current_user)
+      trainee_users_path
     else
       user_page_path
     end
   end
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :phone_no, :state_id, :city_id, :company_id])
+    devise_parameter_sanitizer.permit(:sign_up, keys: %i[name phone_no state_id city_id company_id])
   end
 end

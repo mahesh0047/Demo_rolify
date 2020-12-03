@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class StatesController < ApplicationController
-  before_action :set_state, only: [:show, :edit, :update, :destroy]
+  before_action :set_state, only: %i[show edit update destroy]
 
   # GET /states
   # GET /states.json
@@ -9,8 +11,7 @@ class StatesController < ApplicationController
 
   # GET /states/1
   # GET /states/1.json
-  def show
-  end
+  def show; end
 
   # GET /states/new
   def new
@@ -18,8 +19,7 @@ class StatesController < ApplicationController
   end
 
   # GET /states/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /states
   # POST /states.json
@@ -62,13 +62,14 @@ class StatesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_state
-      @state = State.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def state_params
-      params.require(:state).permit(:name)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_state
+    @state = State.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def state_params
+    params.require(:state).permit(:name)
+  end
 end

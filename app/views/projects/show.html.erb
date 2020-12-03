@@ -1,19 +1,24 @@
+
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @project.name %>
-</p>
+  <h2> Project And Language </h2>
+  
+  <table class="table table-dark" style="width: auto;">
+    <tr>
+      <td><strong>Name:</strong></td>
+      <td><%= @project.name.titleize %></td>
+    </tr>
 
-<p>
-  <strong>Start date:</strong>
-  <%= @project.start_date %>
-</p>
+    <tr>
+      <td><strong>State:</strong></td>
+      <td><%= @project.language.name.titleize %></td>
+    </tr>
+  
+    <tr>
+      <td><strong>Language:</strong></td>
+      <td>  <%= @project.language.name.titleize %></td>
+    </tr>
+  </table>
 
-<p>
-  <strong>Language:</strong>
-  <%= @project.language_id %>
-</p>
-
-<%= link_to 'Edit', edit_project_path(@project) %> |
-<%= link_to 'Back', projects_path %>
+<%= link_to 'Edit', edit_project_path(@project), class: 'btn btn-success text-white' %> 
+<%= link_to 'Back', projects_path, class: 'btn btn-success text-white' %>

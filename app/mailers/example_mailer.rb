@@ -1,8 +1,10 @@
-class ExampleMailer < ApplicationMailer
-      default from: 'milan.tagline@gmail.com'
+# frozen_string_literal: true
 
-    def sample_email(user)
-        @user = user
-        mail(to: @user.email, subject: 'Sample Email')
-    end
+class ExampleMailer < ApplicationMailer
+  default from: 'milan.tagline@gmail.com'
+
+  def sample_email(user)
+    @user = user
+    mail(to: @user.email, subject: 'Sample Email')
+  end
 end
