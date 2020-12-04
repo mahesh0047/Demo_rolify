@@ -2,13 +2,15 @@
 
 module Admin
   class UsersController < ApplicationController
+    before_action :authenticate_user    
+    before_action :role_languages, only: %i[new create edit update]    
     before_action :set_user, only: %i[show edit update destroy]
     load_and_authorize_resource
 
     # GET /users
     # GET /users.json
     def index
-      @users = User.admin
+      @users = User.admin.joins(:state, :city, :company).select('users.*,states.name as state_name','users.*,cities.name as city_name','users.*,companies.name as company_name').distinct
     end
 
     # GET /users/1
@@ -21,22 +23,21 @@ module Admin
     end
 
     # GET /users/1/edit
-    def edit; end
-
+    def edit
+    end
+ 
     # POST /users
     # POST /users.json
     def create
-      p "==========#{params.inspect}"
       password = params[:user][:password] = 123_456
-      role = params[:user][:roles]
+      role = params[:user][:role_id]
       language_ids = params[:user][:languages]
-      # p"::::::::::#{language.inspect}"
       @user = User.new(user_params)
       @user.add_role role
       @user.language_ids = language_ids
       respond_to do |format|
         if @user.save
-          format.html { redirect_to admin_users_url(@user), notice: 'User was successfully created.' }
+          format.html { redirect_to admin_users_path, notice: 'User was successfully created.' }
           format.json { render :show, status: :created, location: @user }
         else
           format.html { render :new }
@@ -49,6 +50,9 @@ module Admin
     # PATCH/PUT /users/1.json
     def update
       language_ids = params[:user][:languages]
+      role = params[:user][:role_id]
+      @user.remove_role @user.roles_name
+      @user.add_role role
       @user.language_ids = language_ids
       respond_to do |format|
         if @user.update(user_params)
@@ -66,10 +70,10 @@ module Admin
     def destroy
       @user.destroy
       respond_to do |format|
-        format.html { redirect_to admin_users_url, notice: 'User was successfully destroyed.' }
+        format.html { redirect_to admin_users_path, notice: 'User was successfully destroyed.' }
         format.json { head :no_content }
       end
-    end
+    end 
 
     def get_city
       @state = State.find(params[:state_id])
@@ -84,6 +88,16 @@ module Admin
       @user = User.find(params[:id])
     end
 
+    def authenticate_user
+        unless current_user.has_role? :admin
+          redirect_to  root_path
+        end
+    end
+
+    def role_languages
+       @roles = Role.all
+       @languages = Language.all
+    end
     # Only allow a list of trusted parameters through.
     def user_params
       params.require(:user).permit(:name, :email, :phone_no, :password, :city_id, :state_id, :company_id)

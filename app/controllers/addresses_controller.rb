@@ -7,7 +7,7 @@ class AddressesController < ApplicationController
   # GET /addresses
   # GET /addresses.json
   def index
-    @addresses = Address.all
+    @addresses = Address.joins(:company, :city, :state).select('addresses.*,companies.name as company_name','addresses.*,cities.name as city_name','addresses.*,states.name as state_name').distinct
   end
 
   # GET /addresses/1

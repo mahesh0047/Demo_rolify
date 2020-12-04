@@ -46,6 +46,12 @@
     <%= f.select(:roles, Role.all.collect {|r| [r.name]},{:prompt => 'Select Roles'},{:class => "form-control"})%>
   </div>
 
+   <div class="field col-md-5">
+    <%= f.label :languages %>
+    <%= f.select(:languages, Language.all.collect {|l| [l.name, l.id]},{:prompt => 'Select Languages'},{:class => "form-control",id: "languages_ids",multiple: true})%>
+  </div>
+
+
   <div class="actions">
     <%= f.submit  class: 'btn btn-info text-white'  %>
   </div>
@@ -54,6 +60,7 @@
 
 <script>
       $(document).ready(function() {
+        $('#languages_ids').multiselect();
         $("#user_state_id").change(function() {
           var state_id = $(this).val();
           // console.log(state_id);

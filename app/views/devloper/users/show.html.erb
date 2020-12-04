@@ -36,6 +36,11 @@
     <td><strong>Role:</strong></td>
     <td><%= @user.roles.first.name.titleize %></td>
   </tr>
+
+  <tr>
+    <td><strong>Languages:</strong></td>
+    <td><%= @user.languages.pluck(:name).join(", ") %></td>
+  </tr>
 </table>
 
 <%# <%= link_to 'Edit', edit_devloper_user_path,:class => "btn btn-primary text-white" %>

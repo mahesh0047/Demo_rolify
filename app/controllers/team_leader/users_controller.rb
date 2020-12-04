@@ -2,13 +2,14 @@
 
 module TeamLeader
   class UsersController < ApplicationController
+    before_action :authenticate_user
     before_action :set_user, only: %i[show edit update destroy]
     load_and_authorize_resource
 
     # GET /users
     # GET /users.json
     def index
-      @users = User.team_leader
+       @users = User.team_leader.joins(:state, :city, :company).select('users.*,states.name as state_name','users.*,cities.name as city_name','users.*,companies.name as company_name').distinct
     end
 
     # GET /users/1
@@ -28,7 +29,10 @@ module TeamLeader
     def create
       password = params[:user][:password] = 123_456
       role = params[:user][:roles]
+      language_ids = params[:user][:languages]
+
       @user = User.new(user_params)
+      @user.language_ids = language_ids
       @user.add_role role
       respond_to do |format|
         if @user.save
@@ -45,6 +49,8 @@ module TeamLeader
     # PATCH/PUT /users/1.json
     def update
       respond_to do |format|
+        language_ids = params[:user][:languages]
+        @user.language_ids = language_ids
         if @user.update(user_params)
           format.html { redirect_to team_leader_user_path(@user), notice: 'User was successfully updated.' }
           format.json { render :show, status: :ok, location: @user }
@@ -76,6 +82,12 @@ module TeamLeader
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
+    end
+
+    def authenticate_user
+        unless current_user.has_role? :team_leader
+          redirect_to  root_path
+        end
     end
 
     # Only allow a list of trusted parameters through.

@@ -19,9 +19,9 @@
     <% @addresses.each do |address| %>
       <tr>
         <td><%= address.name.titleize %></td>
-        <td><%= address.company.name.titleize %></td>
-        <td><%= address&.state&.name&.titleize %></td>
-        <td><%= address&.city&.name&.titleize %></td>
+        <td><%= address.company_name.titleize %></td>
+        <td><%= address.state_name&.titleize %></td>
+        <td><%= address.city_name&.titleize %></td>
         <td><%= link_to 'Show', address,class: 'btn btn-success text-white' %></td>
         <td><%= link_to 'Edit', edit_address_path(address),class: 'btn btn-info text-white' %></td>
         <td><%= link_to 'Destroy', address, method: :delete, data: { confirm: 'Are you sure?' },class: 'btn btn-danger text-white' %></td>

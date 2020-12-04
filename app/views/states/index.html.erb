@@ -7,7 +7,6 @@
       <th>Name</th>
       <th>Action</th>
       <th>Action</th>
-      <th>Action</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,7 +15,6 @@
     <% @states.each do |state| %>
       <tr>
         <td><%= state.name.titleize %></td>
-        <td><%= link_to 'Show', state,class: 'btn btn-success text-white' %></td>
         <td><%= link_to 'Edit', edit_state_path(state),class: 'btn btn-info text-white' %></td>
         <td><%= link_to 'Destroy', state, method: :delete, data: { confirm: 'Are you sure?' },class: 'btn btn-danger text-white' %></td>
       </tr>

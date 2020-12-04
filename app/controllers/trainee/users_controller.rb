@@ -2,6 +2,7 @@
 
 module Trainee
   class UsersController < ApplicationController
+    before_action :authenticate_user
     before_action :set_user, only: %i[show edit update destroy]
     load_and_authorize_resource
 
@@ -12,7 +13,9 @@ module Trainee
 
     # GET /users/1
     # GET /users/1.json
-    def show; end
+    def show
+      
+    end
 
     # GET /users/new
     def new
@@ -75,6 +78,11 @@ module Trainee
       @user = User.find(params[:id])
     end
 
+    def authenticate_user
+        unless current_user.has_role? :trainee
+          redirect_to  root_path
+        end
+    end
     # Only allow a list of trusted parameters through.
     def user_params
       params.require(:user).permit(:name, :email, :phone_no, :city_id, :state_id, :company_id)

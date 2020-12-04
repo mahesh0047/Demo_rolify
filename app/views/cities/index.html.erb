@@ -17,7 +17,7 @@
     <% @cities.each do |city| %>
       <tr>
         <td><%= city.name.titleize %></td>
-        <td><%= city.state.name.titleize %></td>
+        <td><%= city.state_name.titleize %></td>
         <td><%= link_to 'Show', city, class: 'btn btn-success text-white' %></td>
         <td><%= link_to 'Edit', edit_city_path(city),class: 'btn btn-info text-white' %></td>
         <td><%= link_to 'Destroy', city, method: :delete, data: { confirm: 'Are you sure?' },class: 'btn btn-danger text-white' %></td>

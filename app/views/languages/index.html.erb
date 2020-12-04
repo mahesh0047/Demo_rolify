@@ -8,7 +8,6 @@
       <th>Name</th>
       <th>Action</th>
       <th>Action</th>
-      <th>Action</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -17,7 +16,6 @@
     <% @languages.each do |language| %>
       <tr>
         <td><%= language.name.titleize %></td>
-        <td><%= link_to 'Show', language, class: "btn btn-success text-white" %></td>
         <td><%= link_to 'Edit', edit_language_path(language), class: "btn btn-info text-white" %></td>
         <td><%= link_to 'Destroy', language, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger text-white" %></td>
       </tr>

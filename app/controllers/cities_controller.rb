@@ -6,7 +6,7 @@ class CitiesController < ApplicationController
   # GET /cities
   # GET /cities.json
   def index
-    @cities = City.all
+    @cities = City.joins(:state).select('cities.*,states.name as state_name').distinct
   end
 
   # GET /cities/1

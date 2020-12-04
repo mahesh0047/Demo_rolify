@@ -4,7 +4,6 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    p "==================#{user.name}"
     if user.has_role? :admin
       can :manage, :all
       can :manage, Address
@@ -13,10 +12,6 @@ class Ability
       can :manage, Company
     elsif user.has_role? :team_leader
       can :manage, :all
-      # can :manage, Address
-      # can :manage, City
-      # can :manage, State
-      # can :manage, Company
     elsif user.has_role? :devloper
       can :read, :all
     elsif user.has_role? :trainee
