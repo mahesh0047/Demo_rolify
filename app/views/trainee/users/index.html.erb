@@ -26,10 +26,10 @@
         <td><%= user.name.titleize %></td>
         <td><%= user.email %></td>
         <td><%= user.phone_no %></td>
-        <td><%= user.state.name.titleize %></td>
-        <td><%= user.city.name.titleize %></td>
-        <td><%= user.company&.name.titleize %></td>
-        <td><%= user.roles.first&.name&.titleize %></td>
+        <td><%= user.state.try(:name).try(:titleize) %></td>
+        <td><%= user.city.try(:name).try(:titleize) %></td>
+        <td><%= user.company&.try(:name).try(:titleize)%></td>
+        <td><%= user.roles.try(:first).try(:name).try(:titleize) %></td>
         <td><%= user.languages.pluck(:name).join(", ") %></td>
       </tr>
     <% end %>

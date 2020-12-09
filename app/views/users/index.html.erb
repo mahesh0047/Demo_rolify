@@ -25,9 +25,9 @@
         <td><%= user.name.titleize %></td>
         <td><%= user.email %></td>
         <td><%= user.phone_no %></td>
-        <td><%= user.state_name.titleize %></td>
-        <td><%= user.city_name.titleize %></td>
-        <td><%= user.company_name.titleize %></td>
+        <td><%= user.state_name&.titleize %></td>
+        <td><%= user.city_name&.titleize %></td>
+        <td><%= user.company_name&.titleize %></td>
         <td><%= user.roles.first&.name&.titleize %></td>
         <td><%= link_to 'Show', user, class: 'btn btn-success text-white' %></td>
         <td><%= link_to 'Edit', edit_user_registration_path, class: 'btn btn-info text-white' %></td>

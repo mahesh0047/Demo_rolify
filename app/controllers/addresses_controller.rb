@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Explanation of addres class
 class AddressesController < ApplicationController
   before_action :set_address, only: %i[show edit update destroy]
   load_and_authorize_resource
@@ -7,7 +8,7 @@ class AddressesController < ApplicationController
   # GET /addresses
   # GET /addresses.json
   def index
-    @addresses = Address.joins(:company, :city, :state).select('addresses.*,companies.name as company_name','addresses.*,cities.name as city_name','addresses.*,states.name as state_name').distinct
+    @addresses = Address.joins(:company, :city, :state).select('addresses.*,companies.name as company_name', 'addresses.*,cities.name as city_name', 'addresses.*,states.name as state_name').distinct
   end
 
   # GET /addresses/1

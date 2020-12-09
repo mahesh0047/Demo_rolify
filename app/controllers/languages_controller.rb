@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Explanation of Person class
 class LanguagesController < ApplicationController
   before_action :set_language, only: %i[show edit update destroy]
 

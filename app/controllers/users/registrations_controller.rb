@@ -10,7 +10,7 @@ module Users
     #   super
     # end
 
-    def get_city
+    def getcity
       @state = State.find(params[:state_id])
       @cities = @state.cities
       p "::::::::::::::#{@cities.class}"

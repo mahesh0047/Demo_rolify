@@ -43,6 +43,7 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
+  config.hosts << 'mahesh-f86538fb.localhost.run'
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local
 
@@ -99,8 +100,5 @@ Rails.application.configure do
     # Bullet.n_plus_one_query_enable     = false
     # Bullet.unused_eager_loading_enable = false
     # Bullet.counter_cache_enable        = false
-
-
-
   end
 end

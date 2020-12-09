@@ -5,8 +5,18 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
 
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+  devise  :database_authenticatable, :registerable,
+          :recoverable, :rememberable, :validatable,
+          :omniauthable, omniauth_providers: %i[facebook github google_oauth2]
+
+  def self.create_from_provider_data(provider_data)
+    create_with(provider: provider_data.provider, uid: provider_data.uid).find_or_create_by(email: provider_data.info.email) do |user|
+      user.name = provider_data.info.name
+      user.password = Devise.friendly_token[0, 20]
+      user.add_role(:trainee)
+      user.save(validate: false)
+    end
+  end
 
   belongs_to :state
   belongs_to :city
