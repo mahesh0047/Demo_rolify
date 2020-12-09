@@ -83,6 +83,14 @@ module Admin
       # render json: { cities: @cities }
     end
 
+    def search
+      keyword = params[:keyword]  
+       p"==============#{keyword.inspect}"
+      # @users = User.where("users.name LIKE ?", "%#{keyword}%")
+      @users = User.admin.left_outer_joins(:state, :city, :company).select('users.*,states.name as state_name', 'users.*,cities.name as city_name', 'users.*,companies.name as company_name').where("users.name LIKE ?", "%#{keyword}%").distinct
+       p"==============#{@users.inspect}"
+    end
+
     private
 
     # Use callbacks to share common setup or constraints between actions.

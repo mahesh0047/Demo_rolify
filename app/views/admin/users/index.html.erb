@@ -1,5 +1,9 @@
 <p id="notice"><%= notice %></p>
 
+  <div class="col-md-5">  
+    <%= text_field_tag 'search', nil, class: 'form-control'%>
+  </div> 
+
 
 <div class="page-header">
   <h1>Users</h1>
@@ -20,22 +24,8 @@
     </tr>
   </thead>
 
-  <tbody>
-    <% @users.each do |user| %>
-      <tr>
-        <td><%= user.name.titleize %></td>
-        <td><%= user.email %></td>
-        <td><%= user.phone_no %></td>
-        <td><%= user.state_name&.titleize %></td>
-        <td><%= user.city_name&.titleize %></td>
-        <td><%= user.company_name&.titleize %></td>
-        <td><%= user.roles.first.name&.titleize %></td>
-        <td><%= user.languages.pluck(:name).join(", ") %></td>
-        <td><%= link_to 'Show', admin_user_path(user), class: 'btn btn-success text-white' %></td>
-        <td><%= link_to 'Edit',  edit_admin_user_path(user), class: 'btn btn-info text-white' %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' },class: 'btn btn-danger text-white' %></td>
-      </tr>
-    <% end %>
+  <tbody id="user_data">
+    <%= render 'user_data', user: @user %>
   </tbody>
 </table>
 
@@ -43,3 +33,20 @@
 
 <%= link_to 'New User', new_admin_user_path, :class => "btn btn-primary text-white" %>
 
+<script>
+      $(document).ready(function(){
+      // $('#languages_ids').multiselect();
+        $("#search").keyup(function(){
+          var keyword = $(this).val();
+          console.log(">>>>",keyword);
+          $.ajax({
+              url: '/search.js',
+              type: 'GET',
+              data: {keyword: keyword}
+              ,success: function (data, status, xhr) {
+                  // console.log("vgswh")
+              }
+            });
+        });
+      });
+</script>
