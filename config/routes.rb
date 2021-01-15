@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   devise_scope :user do
     get '/getcity', to: 'users/registrations#getcity'
     get '/search' , to: 'admin/users#search'
-    get '/search' , to: 'team_leader/users#search'
+    # get '/search' , to: 'team_leader/users#search' 
     # get 'check_active', to: "devise/sessions#check_active"
   end
 

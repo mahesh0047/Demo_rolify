@@ -12,7 +12,7 @@ module Admin
     # GET /users
     # GET /users.json
     def index
-      @users = User.admin.left_outer_joins(:state, :city, :company).select('users.*,states.name as state_name', 'users.*,cities.name as city_name', 'users.*,companies.name as company_name').distinct
+      @users = User.not_admin.left_outer_joins(:state, :city, :company).select('users.*,states.name as state_name', 'users.*,cities.name as city_name', 'users.*,companies.name as company_name').distinct
     end
 
     # GET /users/1
@@ -29,7 +29,7 @@ module Admin
 
     # POST /users
     # POST /users.json
-    #
+
     def create
       password = params[:user][:password] = 123_456
       role = params[:user][:role_id]
@@ -80,14 +80,14 @@ module Admin
     def getcity
       @state = State.find(params[:state_id])
       @cities = @state.cities
-      # render json: { cities: @cities }
+      # render json: { cities: @cities }  
     end
 
     def search
       keyword = params[:keyword]  
        p"==============#{keyword.inspect}"
       # @users = User.where("users.name LIKE ?", "%#{keyword}%")
-      @users = User.admin.left_outer_joins(:state, :city, :company).select('users.*,states.name as state_name', 'users.*,cities.name as city_name', 'users.*,companies.name as company_name').where("users.name LIKE ?", "%#{keyword}%").distinct
+      @users = User.not_admin.left_outer_joins(:state, :city, :company).select('users.*,states.name as state_name', 'users.*,cities.name as city_name', 'users.*,companies.name as company_name').where("users.name LIKE ?", "%#{keyword}%").distinct
        p"==============#{@users.inspect}"
     end
 

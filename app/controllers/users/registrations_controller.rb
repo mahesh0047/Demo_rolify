@@ -20,7 +20,8 @@ module Users
     # POST /resource
     def create
       super
-      ExampleMailer.sample_email(@user).deliver
+      @user.add_role(:trainee)
+      ExampleMailer.sample_email(@user).deliver   
     end
 
     # GET /resource/edit

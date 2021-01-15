@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   def page; end
 
   def index
-    @users = User.admin.left_outer_joins(:state, :city, :company).select('users.*,states.name as state_name', 'users.*,cities.name as city_name', 'users.*,companies.name as company_name').distinct
+    @users = User.not_admin.left_outer_joins(:state, :city, :company).select('users.*,states.name as state_name', 'users.*,cities.name as city_name', 'users.*,companies.name as company_name').distinct
   end
 
   def edit; end

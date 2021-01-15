@@ -14,7 +14,6 @@ class ApplicationController < ActionController::Base
   protected
 
   def after_sign_in_path_for(resource)
-    puts '-------------------'
     if resource.has_role? :admin
       admin_users_path
     elsif resource.has_role? :team_leader
@@ -24,7 +23,7 @@ class ApplicationController < ActionController::Base
     elsif resource.has_role? :trainee
       trainee_users_path
     else
-      user_page_path
+      root_path
     end
   end
 

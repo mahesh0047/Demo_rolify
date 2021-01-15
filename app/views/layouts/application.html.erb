@@ -69,7 +69,7 @@
                 <%# <% end %> 
               <%# </li> %>
             <% else %>
-              <% if current_user && current_user.has_role?(:trainee) or current_user.has_role?(:devloper) or      current_user.has_role?(:team_leader) %>           
+              <% if current_user && current_user.has_role?(:trainee) or current_user.has_role?(:devloper) or current_user.has_role?(:team_leader) %>           
               <% else %>
                   <li>
                     <%= link_to addresses_path, class: 'app-menu__item' do %>

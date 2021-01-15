@@ -11,7 +11,7 @@ module TeamLeader
     # GET /users
     # GET /users.json
     def index
-      @users = User.team_leader.joins(:state, :city, :company).select('users.*,states.name as state_name', 'users.*,cities.name as city_name', 'users.*,companies.name as company_name').distinct
+      @users = User.users_for_TL.joins(:state, :city, :company).select('users.*,states.name as state_name', 'users.*,cities.name as city_name', 'users.*,companies.name as company_name').distinct
     end
 
     # GET /users/1
@@ -83,7 +83,7 @@ module TeamLeader
       keyword = params[:keyword]  
        p"==============#{keyword.inspect}"
       # @users = User.where("users.name LIKE ?", "%#{keyword}%")
-      @users = User.team_leader.left_outer_joins(:state, :city, :company).select('users.*,states.name as state_name', 'users.*,cities.name as city_name', 'users.*,companies.name as company_name').where("users.name LIKE ?", "%#{keyword}%").distinct
+      @users = User.users_for_TL.left_outer_joins(:state, :city, :company).select('users.*,states.name as state_name', 'users.*,cities.name as city_name', 'users.*,companies.name as company_name').where("users.name LIKE ?", "%#{keyword}%").distinct
        p"==============#{@users.inspect}"
     end
     
