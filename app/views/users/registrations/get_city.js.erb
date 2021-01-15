@@ -1,8 +1,0 @@
-
-var selectbox = $('#city');
-selectbox.empty();
-selectbox.append(`<option>select city</option>`)
-
-<% @cities.each do |city| %>
- selectbox.append(`<option value='+<%= city.id %>+'><%= city.name %></option>`)    
-<% end %>

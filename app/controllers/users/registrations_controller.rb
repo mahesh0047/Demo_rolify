@@ -10,7 +10,7 @@ module Users
     #   super
     # end
 
-    def get_city
+    def getcity
       @state = State.find(params[:state_id])
       @cities = @state.cities
       p "::::::::::::::#{@cities.class}"
@@ -20,7 +20,8 @@ module Users
     # POST /resource
     def create
       super
-      ExampleMailer.sample_email(@user).deliver
+      @user.add_role(:trainee)
+      ExampleMailer.sample_email(@user).deliver   
     end
 
     # GET /resource/edit

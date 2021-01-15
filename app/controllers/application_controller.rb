@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
+# Explanation of Person class
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
-   rescue_from CanCan::AccessDenied do |exception|
+  rescue_from CanCan::AccessDenied do |exception|
     respond_to do |format|
       format.json { head :forbidden, content_type: 'text/html' }
       format.html { redirect_to main_app.root_url, notice: exception.message }
@@ -22,7 +23,7 @@ class ApplicationController < ActionController::Base
     elsif resource.has_role? :trainee
       trainee_users_path
     else
-      user_page_path
+      root_path
     end
   end
 

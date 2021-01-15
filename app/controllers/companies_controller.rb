@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Explanation of Person class
 class CompaniesController < ApplicationController
   before_action :set_company, only: %i[show edit update destroy]
 
