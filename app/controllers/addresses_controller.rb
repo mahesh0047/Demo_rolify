@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Explanation of addres class
 class AddressesController < ApplicationController
   before_action :set_address, only: %i[show edit update destroy]
   load_and_authorize_resource

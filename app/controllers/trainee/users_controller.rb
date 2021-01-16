@@ -63,7 +63,7 @@ module Trainee
       end
     end
 
-    def get_city
+    def getcity
       @state = State.find(params[:state_id])
       @cities = @state.cities
       # render json: { cities: @cities }

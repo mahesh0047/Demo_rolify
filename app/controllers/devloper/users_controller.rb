@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# Explanation of Person class
+
 module Devloper
   class UsersController < ApplicationController
     before_action :authenticate_user
@@ -9,7 +11,7 @@ module Devloper
     # GET /users
     # GET /users.json
     def index
-      @users = User.devloper
+      @users = User.trainee.joins(:state, :city, :company).select('users.*,states.name as state_name', 'users.*,cities.name as city_name', 'users.*,companies.name as company_name').distinct
     end
 
     # GET /users/1
@@ -64,7 +66,7 @@ module Devloper
       end
     end
 
-    def get_city
+    def getcity
       @state = State.find(params[:state_id])
       @cities = @state.cities
       # render json: { cities: @cities }

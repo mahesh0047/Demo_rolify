@@ -66,7 +66,7 @@
           var state_id = $(this).val();
           // console.log(state_id);
           $.ajax({
-              url: '/get_city.js',
+              url: '/getcity.js',
               type: 'GET',
               data: { state_id: state_id}
               ,success: function (data, status, xhr) {

@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
+# Explanation of Person class
 class UsersController < ApplicationController
-  before_action :authenticate_user
-
   def page; end
 
   def index
-    @users = User.admin.joins(:state, :city, :company).select('users.*,states.name as state_name', 'users.*,cities.name as city_name', 'users.*,companies.name as company_name').distinct
+    @users = User.not_admin.left_outer_joins(:state, :city, :company).select('users.*,states.name as state_name', 'users.*,cities.name as city_name', 'users.*,companies.name as company_name').distinct
   end
 
   def edit; end

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Explanation of Person class
 class ProjectsController < ApplicationController
   before_action :set_project, only: %i[show edit update destroy]
 
