@@ -99,8 +99,5 @@ Rails.application.configure do
     # Bullet.n_plus_one_query_enable     = false
     # Bullet.unused_eager_loading_enable = false
     # Bullet.counter_cache_enable        = false
-
-
-
   end
 end

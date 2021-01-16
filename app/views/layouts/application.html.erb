@@ -43,7 +43,7 @@
                 <% end %>
               <%= link_to 'Sign Out', destroy_user_session_path, method: :delete,class: 'btn btn-danger text-white' %>
               <span class="btn btn-danger text-white">
-                <%= current_user.roles.first&.name.titleize %>
+                <%= current_user.roles.first.name&.titleize %>
               </span>
             <% end %>
         </span>  

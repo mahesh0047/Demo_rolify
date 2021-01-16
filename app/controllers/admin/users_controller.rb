@@ -2,15 +2,15 @@
 
 module Admin
   class UsersController < ApplicationController
-    before_action :authenticate_user    
-    before_action :role_languages, only: %i[new create edit update]    
+    before_action :authenticate_user
+    before_action :role_languages, only: %i[new create edit update]
     before_action :set_user, only: %i[show edit update destroy]
     load_and_authorize_resource
 
     # GET /users
     # GET /users.json
     def index
-      @users = User.admin.joins(:state, :city, :company).select('users.*,states.name as state_name','users.*,cities.name as city_name','users.*,companies.name as company_name').distinct
+      @users = User.admin.joins(:state, :city, :company).select('users.*,states.name as state_name', 'users.*,cities.name as city_name', 'users.*,companies.name as company_name').distinct
     end
 
     # GET /users/1
@@ -23,9 +23,8 @@ module Admin
     end
 
     # GET /users/1/edit
-    def edit
-    end
- 
+    def edit; end
+
     # POST /users
     # POST /users.json
     def create
@@ -73,7 +72,7 @@ module Admin
         format.html { redirect_to admin_users_path, notice: 'User was successfully destroyed.' }
         format.json { head :no_content }
       end
-    end 
+    end
 
     def get_city
       @state = State.find(params[:state_id])
@@ -89,15 +88,14 @@ module Admin
     end
 
     def authenticate_user
-        unless current_user.has_role? :admin
-          redirect_to  root_path
-        end
+      redirect_to root_path unless current_user.has_role? :admin
     end
 
     def role_languages
-       @roles = Role.all
-       @languages = Language.all
+      @roles = Role.all
+      @languages = Language.all
     end
+
     # Only allow a list of trusted parameters through.
     def user_params
       params.require(:user).permit(:name, :email, :phone_no, :password, :city_id, :state_id, :company_id)

@@ -20,6 +20,9 @@ module Users
     # POST /resource
     def create
       super
+
+      p "====---------#{@user.inspect}"
+      @user.add_role :trainee
       ExampleMailer.sample_email(@user).deliver
     end
 

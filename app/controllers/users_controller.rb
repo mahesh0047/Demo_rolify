@@ -2,10 +2,11 @@
 
 class UsersController < ApplicationController
   before_action :authenticate_user
+
   def page; end
 
   def index
-     @users = User.admin.joins(:state, :city, :company).select('users.*,states.name as state_name','users.*,cities.name as city_name','users.*,companies.name as company_name').distinct
+    @users = User.admin.joins(:state, :city, :company).select('users.*,states.name as state_name', 'users.*,cities.name as city_name', 'users.*,companies.name as company_name').distinct
   end
 
   def edit; end
@@ -15,9 +16,7 @@ class UsersController < ApplicationController
   end
 
   def authenticate_user
-        unless current_user.has_role? :admin
-          redirect_to  root_path
-        end
+    redirect_to root_path unless current_user.has_role? :admin
   end
 
   def destroy

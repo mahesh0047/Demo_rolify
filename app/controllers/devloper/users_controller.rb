@@ -78,9 +78,7 @@ module Devloper
     end
 
     def authenticate_user
-        unless current_user.has_role? :devloper
-          redirect_to  root_path
-        end
+      redirect_to root_path unless current_user.has_role? :devloper
     end
 
     # Only allow a list of trusted parameters through.
